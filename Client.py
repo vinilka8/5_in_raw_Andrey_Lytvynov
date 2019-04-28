@@ -21,22 +21,40 @@ class Client(object):
         self.connect_to_server()
 
     def connect_to_server(self):
+        """
+        This function connects the client to a running server.
+        """
         self.sock.connect((self.host, self.port))
 
     def disconnect_from_server(self):
+        """
+        This function disconnects the client from running server.
+        """
         self.sock.close()
 
     def send_message(self, message):
+        """
+        This function sends the message.
+        """
         self.sock.send(message.encode())
 
     def read_server_messages(self):
+        """
+        This  function is used for continues listenning the incomming messages from server (runs with thread).
+        """
         while True:
             logging.info(self.sock.recv(1024).decode())
 
     def receive_message(self):
+        """
+        This function receives incomming messages.
+        """
         return self.sock.recv(1024).decode()
 
     def run(self):
+        """
+        This function runs the proms for client and sends the client decision to the server during the game.
+        """
         message_listener = threading.Thread(target=self.read_server_messages)
         message_listener.setDaemon(True)
         message_listener.start()

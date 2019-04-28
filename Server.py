@@ -13,6 +13,9 @@ logging.basicConfig(level=logging.INFO, format='(%(threadName)-10s) %(message)s'
 
 
 class ThreadedServer(object):
+    """
+    This class represents Threaded Server which includes backend logic for 5 in raw game.
+    """
     def __init__(self, host, port):
         self.host = host
         self.port = port
@@ -28,6 +31,9 @@ class ThreadedServer(object):
 
     @staticmethod
     def disconnects_client(client):
+        """
+        This function ends current client connection.
+        """
         client.close()
 
     @staticmethod
@@ -78,6 +84,9 @@ class ThreadedServer(object):
 
     @staticmethod
     def split_player_tuple_on_comma(player_attributes):
+        """
+        This function players tuple into player name and player color, then returns.
+        """
         player_name = player_attributes.split(',')[0]
         player_color = player_attributes.split(',')[1]
         return player_name, player_color
@@ -104,6 +113,9 @@ class ThreadedServer(object):
                     break
 
     def listen(self):
+        """
+        This function listens for incomming requests from client to join before starting the game.
+        """
         clients = {}
         addresses = {}
         count = 0
